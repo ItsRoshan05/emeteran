@@ -17,7 +17,7 @@
           Selamat Datang di <br><span class="text-blue-600">e-Meteran</span>
         </h1>
         <p class="text-lg text-gray-600 mb-8">
-          Aplikasi pencatatan pemakaian air berbasis web untuk pelanggan eksternal. Efisien, praktis, dan mudah digunakan.
+          Aplikasi pencatatan pemakaian air berbasis web untuk pelanggan eksternal. Efisien, praktis, dan sangat mudah digunakan.
         </p>
         <a href="{{ route('login') }}"
            class="inline-block px-6 py-3 bg-[#1E3A8A] text-white text-lg rounded-md hover:bg-[#1E40AF] transition">
