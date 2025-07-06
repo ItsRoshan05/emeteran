@@ -21,14 +21,16 @@
       <label for="awal" class="block font-semibold mb-1">Tanggal Awal</label>
       <input type="date" name="awal" id="awal" required
              class="w-full border-gray-300 rounded-md"
-             value="{{ old('awal', $periode->awal->format('Y-m-d')) }}">
+             value="{{ old('awal', \Carbon\Carbon::parse($periode->awal)->format('Y-m-d')) }}"
+
     </div>
 
     <div class="mb-4">
       <label for="akhir" class="block font-semibold mb-1">Tanggal Akhir</label>
       <input type="date" name="akhir" id="akhir" required
              class="w-full border-gray-300 rounded-md"
-             value="{{ old('akhir', $periode->akhir->format('Y-m-d')) }}">
+             value="{{ old('awal', \Carbon\Carbon::parse($periode->akhir)->format('Y-m-d')) }}"
+
     </div>
 
     <div class="mb-4">
@@ -40,7 +42,7 @@
     </div>
 
     <div class="flex justify-end">
-      <a href="{{ route('admin.periode.index') }}" class="mr-2 px-4 py-2 bg-gray-200 rounded-md">Batal</a>
+      <a href="{{ route('admin.periodes.index') }}" class="mr-2 px-4 py-2 bg-gray-200 rounded-md">Batal</a>
       <button type="submit" class="px-4 py-2 bg-[#1E3A8A] text-white rounded-md hover:bg-[#1E40AF]">
         Update
       </button>

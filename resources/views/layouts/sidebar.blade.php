@@ -62,6 +62,16 @@
         <span>Periode</span>
       </a>
 
+            <!-- Periode -->
+      <a href="{{ route('admin.tarifs.index') }}"
+         class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#1E3A8A] transition {{ $active('admin.tarifs.*') }}">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3m0 0c1.657 0 3-1.343 3-3s-1.343-3-3-3m0 6v2m0-8V6m0 0a9 9 0 110 18 9 9 0 010-18z" />
+</svg>
+        <span>Tarif</span>
+      </a>
+
       <!-- Meteran -->
       <a href="{{ route('admin.meterans.index') }}"
          class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#1E3A8A] transition {{ $active('admin.meterans.*') }}">
