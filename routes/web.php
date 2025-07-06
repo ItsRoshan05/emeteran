@@ -39,7 +39,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
 
 // ----------------- PETUGAS -----------------
 Route::prefix('petugas')->name('petugas.')->middleware(['auth', 'role:petugas'])->group(function () {
-    Route::get('/', fn() => redirect()->route('petugas.meterans.index')); // opsional redirect
+    Route::get('/', fn() => redirect()->route('petugas.meterans.index'));
     Route::resource('/meterans', MeteranController::class);
 });
 

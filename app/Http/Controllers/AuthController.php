@@ -28,7 +28,7 @@ class AuthController extends Controller
             return match ($user->role) {
                 'admin'   => redirect()->route('admin.dashboard'),
                 'user'    => redirect()->route('user.dashboard'),
-                'petugas' => redirect()->route('admin.dashboard'),
+                'petugas' => redirect()->route('petugas.meterans.index'),
                 default   => redirect('/'),
             };
         }
