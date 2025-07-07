@@ -6,7 +6,7 @@
 <div class="bg-white p-6 rounded-lg shadow-md">
   <h2 class="text-2xl font-semibold text-[#1E3A8A] mb-6">Edit Data Meteran</h2>
 
-  <form action="{{ route('admin.meterans.update', $meteran->id) }}" method="POST">
+  <form action="{{ route('meterans.update', $meteran->id) }}" method="POST">
     @csrf
     @method('PUT')
 

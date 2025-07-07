@@ -6,7 +6,7 @@
 <div class="bg-white rounded-xl shadow-lg p-6">
   <div class="flex justify-between items-center mb-6">
     <h2 class="text-2xl font-semibold text-[#1E3A8A]">Data Meteran</h2>
-    <a href="{{ route('admin.meterans.create') }}"
+    <a href="{{ route('meterans.create') }}"
        class="px-4 py-2 bg-[#1E3A8A] text-white rounded-md hover:bg-[#1E40AF] transition-all duration-200">
       + Tambah Meteran
     </a>
@@ -55,14 +55,14 @@
             {{ $meteran->tanggal_bayar ? \Carbon\Carbon::parse($meteran->tanggal_bayar)->format('d-m-Y') : '-' }}
           </td>
           <td class="px-5 py-4 space-x-2 whitespace-nowrap">
-            <a href="{{ route('admin.meterans.edit', $meteran->id) }}"
+            <a href="{{ route('meterans.edit', $meteran->id) }}"
                class="text-blue-600 hover:text-blue-800 transition" title="Edit">
               <svg class="w-5 h-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M11 4h10M5 20h14a2 2 0 002-2v-5M16 4l4 4m0 0L10 18H6v-4L20 4z"/>
               </svg>
             </a>
-            <form action="{{ route('admin.meterans.destroy', $meteran->id) }}" method="POST" class="inline-block"
+            <form action="{{ route('meterans.destroy', $meteran->id) }}" method="POST" class="inline-block"
                   onsubmit="return confirm('Yakin ingin menghapus data ini?')">
               @csrf
               @method('DELETE')
@@ -76,7 +76,7 @@
           </td>
           <td class="px-5 py-4 space-x-2 whitespace-nowrap">
   @if ($meteran->status_bayar === 'BELUM')
-    <form action="{{ route('admin.meterans.markAsLunas', $meteran->id) }}" method="POST" onsubmit="return confirm('Tandai meteran ini sebagai LUNAS?')">
+    <form action="{{ route('meterans.markAsLunas', $meteran->id) }}" method="POST" onsubmit="return confirm('Tandai meteran ini sebagai LUNAS?')">
       @csrf
       @method('PATCH')
       <button type="submit" class="text-green-600 hover:text-green-800 font-semibold text-sm">

@@ -73,7 +73,7 @@
 
         @if ($role === 'admin' || $role === 'petugas')
             <!-- Meteran -->
-            <a href="{{ route('admin.meterans.index') }}"
+            <a href="{{ route('meterans.index') }}"
                 class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#1E3A8A] transition {{ $active('admin.meterans.*') }}">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

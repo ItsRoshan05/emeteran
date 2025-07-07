@@ -9,38 +9,38 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TarifController;
 use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\MeteranController;
-// Halaman landing (jika ada)
-Route::get('/', function () {
-    return view('index');
-});
 
+// ----------------- HALAMAN LANDING -----------------
+Route::get('/', fn () => view('index'));
 
-// Login & Landing
-Route::get('/', fn() => view('index'));
+// ----------------- LOGIN & LOGOUT -----------------
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// ----------------- ADMIN -----------------
+// ----------------- ADMIN ONLY -----------------
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
     Route::resource('/users', UserController::class);
     Route::resource('/pelanggans', PelangganController::class);
     Route::resource('/pengumumans', PengumumanController::class);
     Route::resource('/tarifs', TarifController::class);
     Route::resource('/periodes', PeriodeController::class);
-    Route::resource('/meterans', MeteranController::class); // admin juga boleh akses
-    Route::patch('/meterans/{meteran}/lunas', [MeteranController::class, 'markAsLunas'])->name('meterans.markAsLunas');
-    Route::patch('/pengumumans/{id}/toggle', [PengumumanController::class, 'toggleTampilkanDiUser'])
-    ->name('admin.pengumumans.toggle');
 
-
+    // Fitur khusus admin di meteran
+    Route::patch('/pengumumans/{id}/toggle', [PengumumanController::class, 'toggleTampilkanDiUser'])->name('pengumumans.toggle');
 });
 
-// ----------------- PETUGAS -----------------
+// ----------------- ADMIN & PETUGAS (SHARED) -----------------
+Route::middleware(['auth', 'role:admin|petugas'])->group(function () {
+    Route::resource('/meterans', MeteranController::class)->names('meterans');
+    Route::patch('/meterans/{meteran}/lunas', [MeteranController::class, 'markAsLunas'])->name('meterans.markAsLunas');
+});
+
+// ----------------- PETUGAS REDIRECT DASHBOARD -----------------
 Route::prefix('petugas')->name('petugas.')->middleware(['auth', 'role:petugas'])->group(function () {
-    Route::get('/', fn() => redirect()->route('petugas.meterans.index'));
-    Route::resource('/meterans', MeteranController::class);
+    Route::get('/', fn() => redirect()->route('meterans.index'));
 });
 
 // ----------------- USER -----------------

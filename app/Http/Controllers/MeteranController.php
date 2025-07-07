@@ -49,7 +49,7 @@ public function store(Request $request)
 
     Meteran::create($validated);
 
-    return redirect()->route('admin.meterans.index')->with('success', 'Data meteran berhasil ditambahkan.');
+    return redirect()->route('meterans.index')->with('success', 'Data meteran berhasil ditambahkan.');
 }
 
     public function edit(Meteran $meteran)
@@ -89,13 +89,13 @@ public function store(Request $request)
             'petugas_id' => $request->petugas_id,
         ]);
 
-        return redirect()->route('admin.meterans.index')->with('success', 'Data meteran berhasil diperbarui.');
+        return redirect()->route('meterans.index')->with('success', 'Data meteran berhasil diperbarui.');
     }
 
     public function destroy(Meteran $meteran)
     {
         $meteran->delete();
-        return redirect()->route('admin.meterans.index')->with('success', 'Data meteran berhasil dihapus.');
+        return redirect()->route('meterans.index')->with('success', 'Data meteran berhasil dihapus.');
     }
 
     public function markAsLunas(Meteran $meteran)

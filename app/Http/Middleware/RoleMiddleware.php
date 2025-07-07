@@ -4,24 +4,41 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
+
 class RoleMiddleware
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * Mendukung format middleware:
+     * - role:admin
+     * - role:admin,petugas
+     * - role:admin|petugas
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @param  mixed  ...$roles
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
-                if (!Auth::check()) {
+        if (!Auth::check()) {
             return redirect('/login');
         }
 
         $user = Auth::user();
 
-        if (!in_array($user->role, $roles)) {
+        // Gabungkan semua role jika ada pemisah '|' seperti role:admin|petugas
+        $allowedRoles = [];
+
+        foreach ($roles as $role) {
+            $parts = explode('|', $role);
+            $allowedRoles = array_merge($allowedRoles, $parts);
+        }
+
+        if (!in_array($user->role, $allowedRoles)) {
             abort(403, 'Akses ditolak.');
         }
 

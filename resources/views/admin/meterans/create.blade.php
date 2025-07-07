@@ -6,7 +6,7 @@
 <div class="bg-white p-6 rounded-lg shadow-md">
   <h2 class="text-2xl font-semibold text-[#1E3A8A] mb-6">Tambah Data Meteran</h2>
 
-  <form action="{{ route('admin.meterans.store') }}" method="POST">
+  <form action="{{ route('meterans.store') }}" method="POST">
     @csrf
 
     <div class="grid md:grid-cols-2 gap-4 mb-4">
@@ -86,17 +86,16 @@
         <input type="date" name="tanggal_bayar" class="w-full border-gray-300 rounded-md">
       </div>
 
-      {{-- PILIH PETUGAS --}}
-      <div>
-        <label for="petugas_id" class="block font-medium">Petugas</label>
-        <select name="petugas_id" class="w-full border-gray-300 rounded-md">
-          <option value="">-- Pilih Petugas --</option>
-          @foreach ($petugas as $user)
-            <option value="{{ $user->id }}">{{ $user->name ?? $user->email }}</option>
-          @endforeach
-        </select>
-      </div>
-    </div>
+{{-- PILIH PETUGAS (hanya user login dan disabled) --}}
+<div>
+  <label for="petugas_id" class="block font-medium">Petugas</label>
+  <select name="petugas_id" class="w-full border-gray-300 rounded-md bg-gray-100" disabled>
+    <option value="{{ auth()->user()->id }}" selected>
+      {{ auth()->user()->name ?? auth()->user()->email }}
+    </option>
+  </select>
+</div>
+
 
     <button type="submit" class="bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-800">Simpan</button>
   </form>
